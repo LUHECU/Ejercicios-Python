@@ -80,19 +80,23 @@ def mostrar_datos():
 
     lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
 
+    print("\n--- Horas Frente a Pantallas ---")
     if not lista_datos or len(lista_datos) == 0:
+        print("No hay datos registrados.")
         return
 
-    print("\n--- Horas Frente a Pantallas ---")
     for dato in lista_datos:
         print(f"{dato[0]}: {dato[1]}")
 
 def obtener_nombres():
     nombre_archivo = 'pantallas.txt'
-
-    lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
     nombres = []
 
+    lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
+    
+    if not lista_datos or len(lista_datos) == 0 :
+        return
+    
     for dato in lista_datos:
         nombre = dato[0]
         nombres.append(nombre)

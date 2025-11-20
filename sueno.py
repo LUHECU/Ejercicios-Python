@@ -69,21 +69,25 @@ def mostrar_datos():
 
     lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
 
+    print("\n--- Horas de sueño ---")
     if not lista_datos or len(lista_datos) == 0:
+        print("No hay datos registrados.")
         return
 
-    print("\n--- Horas de sueño ---")
     for dato in lista_datos:
         print(f"{dato[0]}: {dato[1]}")
 
 
 def obtener_nombres():
     nombre_archivo = 'sueno.txt'
-
-    lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
     nombres = []
 
-    for dato in lista_datos:
+    lista_nombres = acceso_archivos.obtener_datos(nombre_archivo)
+    
+    if not lista_nombres or len(lista_nombres) == 0 :
+        return
+
+    for dato in lista_nombres:
         nombre = dato[0]
         nombres.append(nombre)
         
@@ -91,11 +95,13 @@ def obtener_nombres():
 
 def obtener_horas_sueno():
     nombre_archivo = 'sueno.txt'
-
-    lista_datos = acceso_archivos.obtener_datos(nombre_archivo)
     horas = []
 
-    for dato in lista_datos:
+    lista_horas = acceso_archivos.obtener_datos(nombre_archivo)
+    if not lista_horas or len(lista_horas) == 0:
+        return
+
+    for dato in lista_horas:
         hora = dato[1]
         horas.append(int(hora))
         
