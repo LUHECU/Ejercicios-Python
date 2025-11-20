@@ -5,18 +5,18 @@ def agregar_sueno():
     cantidad_horas = ""
 
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if existe: 
+    if existe_nombre: 
         print(f"Esta persona ya se encuentra registrada en {nombre_archivo}")
-        print("Si desea modificar su información, utilice la opción de 'Editar registro existente'.")
+        print("Si desea modificar su información, utilice la opción de 'Editar registro existe_nombrente'.")
         return
 
     while True:
         try:
             cantidad_horas = int(input("Ingrese la cantidad de horas de sueño :"))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_horas} no es una cantidad de horas. Ingrese una cantidad de horas correcta: ")
 
     lista_datos = [nombre, cantidad_horas]
@@ -32,11 +32,17 @@ def agregar_sueno():
 
 def editar_sueno():
     nombre_archivo = 'sueno.txt'
+    existen_datos = acceso_archivos.obtener_datos(nombre_archivo)
+
+    if not existen_datos or len(existen_datos) == 0:
+        print(f"\nNo hay datos registrados.")
+        return
+
     cantidad_horas = ""
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if not existe:
+    if not existe_nombre:
         print(f"No se encontró ninguna persona con el nombre {nombre}.")
         return
     
@@ -44,7 +50,7 @@ def editar_sueno():
         try:
             cantidad_horas = int(input("Ingrese la cantidad de horas de sueño :"))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_horas} no es una cantidad de horas. Ingrese una cantidad de horas correcta: ")
 
     lista_datos = nombre, cantidad_horas

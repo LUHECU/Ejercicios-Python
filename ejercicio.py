@@ -5,18 +5,18 @@ def agregar_ejercicio():
     cantidad_minutos = ""
 
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if existe:
+    if existe_nombre:
         print(f"Esta persona ya se encuentra registrada en {nombre_archivo}")
-        print("Si desea modificar su información, utilice la opción de 'Editar registro existente'.")
+        print("Si desea modificar su información, utilice la opción de 'Editar registro existe_nombrente'.")
         return
 
     while True:
         try:
             cantidad_minutos = int(input("Ingrese la cantidad de minutos de ejercicios :"))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_minutos} no es una cantidad de minutos. Ingrese una cantidad_minutos de minutos correcta: ")
 
     lista_datos = [nombre, cantidad_minutos]
@@ -33,11 +33,17 @@ def agregar_ejercicio():
 
 def editar_ejercicio():
     nombre_archivo = 'ejercicio.txt'
+    existen_datos = acceso_archivos.obtener_datos(nombre_archivo)
+
+    if not existen_datos or len(existen_datos) == 0:
+        print(f"\nNo hay datos registrados.")
+        return
+
     cantidad_minutos = ""
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if not existe:
+    if not existe_nombre:
         print(f"No se encontró ninguna persona con el nombre {nombre}.")
         return
     
@@ -45,7 +51,7 @@ def editar_ejercicio():
         try:
             cantidad_minutos = int(input("Ingrese la cantidad de minutos de ejercicios :"))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_minutos} no es una cantidad de minutos. Ingrese una cantidad_minutos de minutos correcta: ")
 
     lista_datos = nombre, cantidad_minutos

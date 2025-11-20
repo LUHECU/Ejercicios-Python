@@ -17,18 +17,18 @@ def agregar_pantalla():
     cantidad_horas_pantalla = ""
 
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if existe:
+    if existe_nombre:
         print(f"\nEsta persona ya se encuentra registrada en {nombre_archivo}")
-        print("Si desea modificar su información, utilice la opción de 'Editar registro existente'.")
+        print("Si desea modificar su información, utilice la opción de 'Editar registro existe_nombrente'.")
         return
 
     while True:
         try:
             cantidad_horas_pantalla = int(input("Ingrese la cantidad de horas frente a la pantalla: "))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_horas_pantalla} no es una cantidad de horas. Ingrese una cantidad horas correcta: ")
 
     lista_datos = [nombre, cantidad_horas_pantalla]
@@ -44,11 +44,17 @@ def agregar_pantalla():
 
 def editar_pantalla():
     nombre_archivo = 'pantallas.txt'
+    existen_datos = acceso_archivos.obtener_datos(nombre_archivo)
+
+    if not existen_datos or len(existen_datos) == 0:
+        print(f"\nNo hay datos registrados.")
+        return
+
     cantidad_horas_pantalla = ""
     nombre = input("Ingrese el nombre de la persona: ")
-    existe = acceso_archivos.validar_nombre(nombre_archivo, nombre)
+    existe_nombre = acceso_archivos.validar_nombre(nombre_archivo, nombre)
 
-    if not existe:
+    if not existe_nombre:
         print(f"No se encontró ninguna persona con el nombre {nombre}.")
         return
     
@@ -56,7 +62,7 @@ def editar_pantalla():
         try:
             cantidad_horas_pantalla = int(input("Ingrese la cantidad de horas frente a la pantalla: "))
             break
-        except:
+        except ValueError:
             print(f"{cantidad_horas_pantalla} no es una cantidad de horas. Ingrese una cantidad horas correcta: ")
 
     lista_datos = nombre, cantidad_horas_pantalla
